@@ -32,6 +32,10 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
+    public function beforeFilter(){
+        $this->set('currentUser', $this->Auth->user());
+    }
+
     public $helpers = array(
         'Session',
         'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
@@ -39,4 +43,39 @@ class AppController extends Controller {
         'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
     );
     public $layout = 'TwitterBootstrap.default';
+
+    public $components = [
+        'DebugKit.Toolbar',
+        'Flash',
+        'Auth' => [
+            'loginAction' => [
+                'controller' => 'users',
+                'action' => 'login',
+            ],
+            'authenticate' => [
+                'Form' => [
+                    'UserModel' => 'User',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password',
+                    ],
+                    'passwordHasher' => 'Blowfish',
+                ]
+            ],
+            'loginRedirect' => [
+                'controller' => 'documents',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'users',
+                'action' => 'login'
+            ],
+        'authError' => 'ログインしてください',
+        //ログインが必要なページにアクセスした時のメッセージ
+        // CSRF、マスアサインメント対策として Security コンポーネントを使用する
+        // CSRF対策：フォームにトークンが追加されるようになる
+        // マスアサインメント対策：フォーム改ざんチェックが行われる
+        'Security',
+        ]
+    ];
 }
