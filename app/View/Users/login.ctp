@@ -1,4 +1,4 @@
-<div class="container">
+<div class="col-md-8 col-md-offset-2">
 
 <h2>ログイン</h2>
 
@@ -23,11 +23,15 @@
     </div>
 
     <?= $this->Form->submit('ログイン', [
+        'url' => [
+        'controller' => 'document',
+        'actino' => 'index'
+        ],
         'class' => 'btn btn-primary'
         ]); ?>
 
     <div style="margin-top:10px;">
-        <?= $this->Html->link('サインアップ', [
+        <?= $this->Html->link('ユーザー登録', [
             'action' => 'signup'
             ]); ?><br>
     </div>

@@ -13,7 +13,9 @@
         <tbody>
             <?php foreach($documents as $document) :?>
                 <tr>
-                    <td><?= $document['Document']['title'];?></td>
+                    <td><?= $this->Html->link($document['Document']['title'], [
+                        'action' => 'view', $document['Document']['id']
+                        ]) ;?></td>
                 </tr>
 
             <?php endforeach ;?>

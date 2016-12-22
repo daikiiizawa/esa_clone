@@ -1,6 +1,6 @@
-<div class="container">
+<div class="col-md-8 col-md-offset-2">
 
-<h2>新規ユーザ登録</h2>
+<h2>ユーザー登録</h2>
 
     <?= $this->Form->create('User',[
         'type'  => 'post',
