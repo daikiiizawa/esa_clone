@@ -18,9 +18,9 @@
     <?= $this->Form->input('body', [
         'label' => false,
         'type'  => 'text',
-        'rows' => '7',
+        'rows' => '20',
         'class' => 'form-control',
-        'style' => 'width:70%; max-width:100%; max-height:300px'
+        'style' => 'width:70%; max-width:80%; max-height:700px'
         ]); ?>
 
     <?= $this->Form->hidden('id'); ?>

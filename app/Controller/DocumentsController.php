@@ -7,8 +7,12 @@ class DocumentsController extends AppController{
         'Paginator' => [
             'limit' => 10,
             'order' => ['created' => 'desc']
-        ]
+        ],
+        'Markdown.Markdown'
     ];
+
+    // マークダウンプラグイン読み込み
+    public $helpers = array('Markdown.Markdown');
 
     public function isAuthorized($user) {
         // 登録済ユーザーは投稿できる
