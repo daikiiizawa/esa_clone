@@ -14,5 +14,9 @@ class Document extends AppModel {
             ],
         ],
     ];
+
+    public $belongsTo = [
+        'User' => ['className' => 'User'],
+    ];
 }
 

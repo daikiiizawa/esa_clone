@@ -8,6 +8,7 @@
     <table class="table table-striped">
         <thead class="text-info">
             <th>タイトル</th>
+            <th>登録者</th>
         </thead>
 
         <tbody>
@@ -16,6 +17,7 @@
                     <td><?= $this->Html->link($document['Document']['title'], [
                         'action' => 'view', $document['Document']['id']
                         ]) ;?></td>
+                    <td><?= $document['User']['screen_name']?></td>
                 </tr>
 
             <?php endforeach ;?>

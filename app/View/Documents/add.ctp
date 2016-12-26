@@ -1,7 +1,7 @@
 <div class="container">
 
 
-    <h2>ドキュメント登録</h2>
+    <p>ドキュメント登録</p>
     <?= $this->Form->create('Document', [
         'type'  => 'post',
         'novalidate' => true,
@@ -22,9 +22,10 @@
         'style' => 'width:70%; max-width:100%; max-height:300px'
         ]); ?>
 
+    <?= $this->Form->hidden('user_id', ['value' => $user_id]); ?>
 
     <?= $this->Form->end([
-        'label' => '登録する',
+        'label' => '登録',
         'class' => 'btn btn-primary',
         'style' => 'margin: 20px 0px 20px 0px;'
         ]); ?>

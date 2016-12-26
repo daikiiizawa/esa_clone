@@ -1,8 +1,51 @@
 <?php
-App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+App::uses(
+    'BlowfishPasswordHasher',
+    'Controller/Component/Auth'
+    );
 
 class User extends AppModel{
+    // 使用するビヘイビアの宣言
+    public $actsAs = [
+        // UploadプラグインのUploadBehaviorという意味
+        'Upload.Upload' => [
+            // photoというカラムに Uploadビヘイビアを使ってファイル名を登録する
+            'photo' => [
+                // デフォルトのカラム名 dir を photo_dir に変更
+                'fields' => ['dir' => 'photo_dir'],
+                'deleteOnUpdate' => true,
+            ]
+        ],
+    ];
+
+    public $hasMany = [
+        'Document' => [
+            'className' => 'Document',
+            'dependent' => true // User が削除されたら Tweet も再帰的に削除する
+        ]
+    ];
+
     public $validate = [
+        'name' => [
+            'required' => [
+                'rule' => 'notBlank',
+                'message' => '名前を入力してください'
+            ],
+            'maxlength' => [
+                'rule' => ['between', 1, 255],
+                'message' => '名前は255字以下で入力して下さい'
+            ],
+        ],
+        'screen_name' => [
+            'required' => [
+                'rule' => 'notBlank',
+                'message' => 'ニックネームを入力してください'
+            ],
+            'maxlength' => [
+                'rule' => ['between', 1, 255],
+                'message' => ' ニックネームは255字以下で入力して下さい'
+            ],
+        ],
         'email' => [
             'required' => [
                 'rule' => 'notBlank',
@@ -20,6 +63,13 @@ class User extends AppModel{
                 'rule' => ['between', 1, 255],
                 'message' => 'メールアドレスは255字以下で入力して下さい'
             ],
+        ],
+        'role' => [
+            'valid' => [
+                'rule' => ['inList', ['admin', 'student']],
+                'message' => '選択して下さい',
+                'allowEmpty' => false
+            ]
         ],
 
         'password' => [
@@ -63,6 +113,37 @@ class User extends AppModel{
                 'message' => '現在のパスワードが間違っています'
             ]
         ],
+
+        // 画像ファイルアップロードのバリデーション追加
+        'photo' => [
+            'UnderPhpSizeLimit' => [
+                'allowEmpty' => true,
+                'rule' => 'isUnderPhpSizeLimit',
+                'message' => 'アップロード可能なファイルサイズを超えています。'
+            ],
+            'BelowMaxSize' => [
+                'rule' => ['isBelowMaxSize', 5242880],
+                'message' => 'アップロード可能なファイルサイズを超えています。'
+            ],
+            'CompletedUpload' => [
+                'rule' => 'isCompletedUpload',
+                'message' => 'ファイルが正常にアップロードされませんでした。'
+            ],
+            'ValidMimeType' => [
+                'rule' => ['isValidMimeType', ['image/jpeg', 'image/png', 'image/gif'], false],
+                'message' => 'プロフィール画像はjpg/gif/png形式でアップロードしてください。'
+            ],
+            'ValidExtension' => [
+                'rule' => ['isValidExtension', ['jpeg', 'jpg', 'png', 'gif'], false],
+                'message' => 'プロフィール画像はjpg/gif/png形式でアップロードしてください。'
+            ],
+            'size' => [
+                'maxFileSize' => [
+                    'rule' => ['fileSize', '<=', '500KB'],  // 500K以下
+                    'message' => ['プロフィール画像のサイズは500KB以下にしてください。']
+                ],
+            ],
+        ]
     ];
 
     public function passwordConfirm($check) {

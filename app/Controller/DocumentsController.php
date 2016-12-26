@@ -1,6 +1,7 @@
 <?php
 
 class DocumentsController extends AppController{
+    public $uses = ['Document', 'User'];
 
     public $components = [
         'Paginator' => [
@@ -8,6 +9,22 @@ class DocumentsController extends AppController{
             'order' => ['created' => 'desc']
         ]
     ];
+
+    public function isAuthorized($user) {
+        // 登録済ユーザーは投稿できる
+        if ($this->action === 'add') {
+            return true;
+        }
+
+        // 投稿のオーナーは編集や削除ができる
+        if (in_array($this->action, array('view', 'edit', 'delete'))) {
+            $documentId = (int) $this->request->params['pass'][0];
+            if ($this->Document->isOwnedBy($documentId, $user['id'])) {
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
+    }
 
     public function index(){
         $this->set('title_for_layout', '一覧画面');
@@ -29,6 +46,9 @@ class DocumentsController extends AppController{
 
     public function add(){
         $this->set('title_for_layout', 'ドキュメント追加');
+        $user_id = $this->Auth->user()['id'];
+        $this->set('user_id', $user_id);
+
         if ($this->request->is('post')) {
             $this->Document->create();
 
@@ -58,6 +78,7 @@ class DocumentsController extends AppController{
 
     }
 
+
     public function delete($id = null){
         if (!$this->Document->exists($id)) {
             throw new NotFoundException('ドキュメントが見つかりません');
@@ -67,4 +88,12 @@ class DocumentsController extends AppController{
         $this->Flash->success('削除が完了しました。');
         return $this->redirect(['action' => 'index']);
     }
+
+
+    public function team(){
+        $users = $this->User->find('all');
+        $this->set('users', $users);
+        // debug($users);
+    }
+
 }
