@@ -3,20 +3,37 @@
 class Document extends AppModel {
 
     public $validate = [
-        'family_name' => [
+        'title' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => '姓を入力して下さい'
+                'message' => 'タイトルを入力して下さい'
             ],
             'length' => [
                 'rule' => ['between', 1, 50],
-                'message' => '姓を50字以下で入力して下さい'
+                'message' => 'タイトルを50字以下で入力して下さい'
+            ],
+        ],
+        'body' => [
+            'required' => [
+                'rule' => 'notBlank',
+                'message' => '内容を入力して下さい'
+            ],
+            'length' => [
+                'rule' => ['between', 1, 50],
+                'message' => '50字以下で入力して下さい'
             ],
         ],
     ];
 
     public $belongsTo = [
         'User' => ['className' => 'User'],
+    ];
+
+    public $hasMany = [
+        'Comment' => [
+            'className' => 'Comment',
+            'dependent' => true
+        ]
     ];
 }
 

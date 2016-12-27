@@ -22,6 +22,9 @@ class User extends AppModel{
         'Document' => [
             'className' => 'Document',
             'dependent' => true // User が削除されたら Tweet も再帰的に削除する
+        ],
+        'Comment' => [
+            'className' => 'Comment'
         ]
     ];
 

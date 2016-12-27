@@ -22,7 +22,7 @@
         'label' => false,
         'type'  => 'text',
         'rows' => '20',
-        'class' => 'div1 form-control',
+        'class' => 'form-control',
         'style' => 'max-width:100%; max-height:700px'
         ]); ?>
     </div>

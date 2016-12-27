@@ -50,6 +50,8 @@ class DocumentsController extends AppController{
 
         $document = $this->Document->findById($id);
         $this->set('document', $document);
+        $user = $this->Auth->user();
+        $this->set('user', $user);
     }
 
 

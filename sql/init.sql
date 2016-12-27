@@ -28,6 +28,19 @@ CREATE TABLE `documents` (
 ALTER TABLE `documents` ADD PRIMARY KEY (`id`);
 ALTER TABLE `documents` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `document_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255),
+  `body` varchar(1100) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL
+) ENGINE=InnoDB;
+ALTER TABLE `comments` ADD PRIMARY KEY (`id`);
+ALTER TABLE `comments` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
 
 INSERT INTO `documents` (`title`, `body`, `user_id`, `created`, `updated`) VALUES ("タイトル1/管理者だよ", "ボディ1", "1", now(), now());
 INSERT INTO `documents` (`title`, `body`, `user_id`, `created`, `updated`) VALUES ("タイトル2/user2の田中だよ", "ボディ2", "2", now(), now());
@@ -35,3 +48,4 @@ INSERT INTO `documents` (`title`, `body`, `user_id`, `created`, `updated`) VALUE
 INSERT INTO `documents` (`title`, `body`, `user_id`, `created`, `updated`) VALUES ("タイトル4/管理者", "ボディ1", "1", now(), now());
 INSERT INTO `documents` (`title`, `body`, `user_id`, `created`, `updated`) VALUES ("タイトル5", "ボディ2", "1", now(), now());
 INSERT INTO `documents` (`title`, `body`, `user_id`, `created`, `updated`) VALUES ("タイトル6/ふが", "ボディ3", "3", now(), now());
+
