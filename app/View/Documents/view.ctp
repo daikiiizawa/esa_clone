@@ -1,16 +1,29 @@
 <div class='container'>
 <div class="col-md-12">
 
-    <p>詳細画面</p>
-    <h2 class="col-md-7"><?= h($document['Document']['title']) ;?></h2>
-    <div class="col-md-5">
-        <span><b>Created by <?= h($document['User']['screen_name']);?></b><br>
-        <?= $this->Time->format($document['Document']['created'], '%Y-%m-%d %H:%M');?></span>
+    <div class="col-md-7" style="margin-top: 17px">
+        <span class="h2" style="display: inline">
+            <?= h($document['Document']['title']) ;?>
+        </span>
+        <span class="h3">
+            <?= $this->Html->link(
+                '<span class="glyphicon glyphicon-pencil"></span>',[
+                    'action' => 'edit',$document['Document']['id'],
+                    ], [
+                    'escape' => false
+                    ]) ;?>
+        </span>
+    </div>
 
+    <div class="col-md-5">
+        <span><b>Created by <?= $this->Html->link(h($document['User']['screen_name']),
+            []);?>
+        </b><br>
+        <?= $this->Time->format($document['Document']['created'], '%Y-%m-%d %H:%M');?></span>
     </div>
 
 </div>
-<div class="col-md-10" style="margin-top: 17px">
+<div class="col-md-7" style="margin-top: 17px">
     <table class="table">
         <tbody>
             <tr>

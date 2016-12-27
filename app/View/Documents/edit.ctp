@@ -1,27 +1,31 @@
 <div class="container">
 
-
-    <p>ドキュメント編集</p>
+<div class="col-md-6">
     <?= $this->Form->create('Document',[
         'url' => ['action' => 'edit'],
         'type'  => 'post',
         'novalidate' => true,
         ]); ?>
 
+    <div class="form-group">
     <?= $this->Form->input('title', [
         'label' => 'タイトル',
         'class' => 'form-control',
-        'style' => 'width:70%; max-width:100%;'
+        'style' => 'max-width:100%;'
         ]); ?>
+    </div>
 
     <hr>
+
+    <div class="form-group">
     <?= $this->Form->input('body', [
         'label' => false,
         'type'  => 'text',
         'rows' => '20',
-        'class' => 'form-control',
-        'style' => 'width:70%; max-width:80%; max-height:700px'
+        'class' => 'div1 form-control',
+        'style' => 'max-width:100%; max-height:700px'
         ]); ?>
+    </div>
 
     <?= $this->Form->hidden('id'); ?>
 
@@ -37,4 +41,5 @@
         ) ;?>
 
 </div>
+
 </div>

@@ -25,9 +25,9 @@ class UsersController extends AppController {
 
     public function signup() {
         $this->set('title_for_layout', 'ユーザー登録');
-        if($this->Auth->user()){
-            return $this->redirect($this->Auth->redirectUrl());
-        }
+        // if($this->Auth->user()){
+        //     return $this->redirect($this->Auth->redirectUrl());
+        // }
 
         if($this->request->is('post')){
             $this->User->create();

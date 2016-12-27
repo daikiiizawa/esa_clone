@@ -31,7 +31,12 @@ class DocumentsController extends AppController{
     }
 
     public function index(){
-        $this->set('title_for_layout', '一覧画面');
+        $this->set('title_for_layout', 'HOME');
+        $readme = $this->Document->find('all', [
+            'conditions' => ['Document.title LIKE' => 'README.md'. '%'],
+            ]);
+        $this->set('readme', $readme);
+
         $documents = $this->Paginator->paginate('Document');
         $this->set('documents', $documents);
     }
@@ -95,9 +100,21 @@ class DocumentsController extends AppController{
 
 
     public function team(){
+        $this->set('title_for_layout', 'TEAM');
         $users = $this->User->find('all');
         $this->set('users', $users);
         // debug($users);
+    }
+
+    public function posts(){
+        $this->set('title_for_layout', 'POSTS');
+        $readme = $this->Document->find('all', [
+            'conditions' => ['Document.title LIKE' => 'README.md'. '%'],
+            ]);
+        $this->set('readme', $readme);
+
+        $documents = $this->Paginator->paginate('Document');
+        $this->set('documents', $documents);
     }
 
 }
