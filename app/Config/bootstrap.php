@@ -67,7 +67,7 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); // Loads a single plugin named DebugKit
  */
 
-CakePlugin::load(['DebugKit', 'Upload', 'TwitterBootstrap', 'Markdown']);
+CakePlugin::load(['Markdown' => array('bootstrap' => true), 'DebugKit', 'Upload', 'TwitterBootstrap']);
 
 /**
  * To prefer app translation over plugin translation, you can set

@@ -1,11 +1,10 @@
 <div class="container">
 
-
-    <p>ドキュメント登録</p>
     <?= $this->Form->create('Document', [
         'type'  => 'post',
         'novalidate' => true,
         ]); ?>
+
 
     <?= $this->Form->input('title', [
         'label' => 'タイトル',
@@ -14,12 +13,13 @@
         ]); ?>
 
     <hr>
+
     <?= $this->Form->input('body', [
         'label' => false,
         'type'  => 'text',
-        'rows' => '7',
+        'rows' => '22',
         'class' => 'form-control',
-        'style' => 'width:70%; max-width:100%; max-height:300px'
+        'style' => 'width:70%; max-width:100%; max-height:460px'
         ]); ?>
 
     <?= $this->Form->hidden('user_id', ['value' => $user_id]); ?>
@@ -35,5 +35,4 @@
         'class' => "btn btn-default"]
         ) ;?>
 
-</div>
 </div>

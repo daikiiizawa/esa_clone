@@ -70,24 +70,57 @@ class DocumentsController extends AppController{
         }
     }
 
-
     public function edit($id = null){
         $this->set('title_for_layout', 'ドキュメント編集');
         if (!$this->Document->exists($id)) {
             throw new NotFoundException('ドキュメントが見つかりません');
         }
 
-        if ($this->request->is('post', 'put')) {
-            if ($this->Document->save($this->request->data)) {
-                $this->Flash->success('更新しました。');
-                return $this->redirect(['action' => 'view',$id]);
-            }
-        } else {
-                $this->request->data = $this->Document->findById($id);
+        if (!$this->request->data) {
+            $this->request->data = $this->Document->findById($id);
         }
+
+        // if ($this->request->is('post', 'put')) {
+        //     if ($this->Document->save($this->request->data)) {
+        //         $this->Flash->success('更新しました。');
+        //         return $this->redirect(['action' => 'view',$id]);
+        //     }
+        // } else {
+        //     $this->request->data = $this->Document->findById($id);
+        // }
         $this->set('id',$id);
     }
 
+    public function confirm($id = null) {
+        $this->set('title_for_layout', '確認画面');
+        if (!$this->Document->exists($id)) {
+            throw new NotFoundExeption('ドキュメントが見つかりません');
+        }
+        // 既存データ参照
+        $document = $this->Document->findById($id);
+        $this->set('document', $document);
+        // 編集画面からのpostデータ
+        $confirm = $this->request->data;
+        $this->set('confirm', $confirm);
+    }
+
+    public function save($id = null) {
+        if (!$this->Document->exists($id)) {
+            throw new NotFoundExeption('ドキュメントが見つかりません');
+        }
+        if ($this->request->is(['post', 'put'])) {
+            if ($this->Document->save($this->request->data)) {
+                $this->Flash->success('更新しました');
+                return $this->redirect(['action' => 'view',$id]);
+            } else {
+            $this->Flash->error('必須項目の編集に誤りがあるため保存できませんでした。');
+            return $this->redirect(['action' => 'view',$id]);
+            }
+        } else {
+            $this->Flash->error('失敗');
+            return $this->redirect(['action' => 'view',$id]);
+        }
+    }
 
     public function delete($id = null){
         if (!$this->Document->exists($id)) {
@@ -98,7 +131,6 @@ class DocumentsController extends AppController{
         $this->Flash->success('削除が完了しました。');
         return $this->redirect(['action' => 'index']);
     }
-
 
     public function team(){
         $this->set('title_for_layout', 'TEAM');

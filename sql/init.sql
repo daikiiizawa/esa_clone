@@ -19,7 +19,7 @@ ALTER TABLE `users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 CREATE TABLE `documents` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `body` varchar(1100) NOT NULL,
+  `body` varchar(4000) NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `repry_documents_id` int(11),
   `created` datetime NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `comments` (
   `user_name` varchar(255),
   `user_photo` varchar(255),
   `user_photo_dir` varchar(255),
-  `body` varchar(1100) NOT NULL,
+  `body` varchar(4000) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB;

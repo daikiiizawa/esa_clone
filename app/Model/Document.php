@@ -9,8 +9,8 @@ class Document extends AppModel {
                 'message' => 'タイトルを入力して下さい'
             ],
             'length' => [
-                'rule' => ['between', 1, 50],
-                'message' => 'タイトルを50字以下で入力して下さい'
+                'rule' => ['between', 1, 255],
+                'message' => 'タイトルを255字以下で入力して下さい'
             ],
         ],
         'body' => [
@@ -19,8 +19,8 @@ class Document extends AppModel {
                 'message' => '内容を入力して下さい'
             ],
             'length' => [
-                'rule' => ['between', 1, 50],
-                'message' => '50字以下で入力して下さい'
+                'rule' => ['between', 1, 4000],
+                'message' => '4000字以下で入力して下さい'
             ],
         ],
     ];

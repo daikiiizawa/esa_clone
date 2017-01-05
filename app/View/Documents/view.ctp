@@ -28,7 +28,7 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <td><?= $this->Markdown->transform(h($document['Document']['body']));?></td>
+                        <td><?= $this->Markdown->transform($document['Document']['body']);?></td>
                     </tr>
                 </tbody>
             </table>
@@ -51,9 +51,8 @@
                 ], [
                 'class' => 'btn btn-default pull-right'
                 ]);?>
-
-
         </div>
+        <div class="col-md-4"></div>
     </div>
 
     <!-- コメント一覧 -->
@@ -96,7 +95,7 @@
                 </div>
 
                 <br>
-                <?= $this->Markdown->transform(h($document['Comment']['body']));?>
+                <?= $this->Markdown->transform($document['Comment']['body']);?>
             </div>
         </div>
     <?php endforeach ;?>
