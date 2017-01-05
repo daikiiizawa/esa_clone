@@ -21,7 +21,7 @@
                 <tr>
                     <td>
                         <b class="h3"><?= $this->Html->link($user['User']['screen_name'], []) ;?></b>
-                        <<?= count($user['Document']);?>>
+                        <span class="bg-info">( <?= count($user['Document']);?> )</span>
                         <br>
                         <b><?= $this->Html->link($user['User']['name'],'',['style'=>'text-decoration:none; color:black']) ;?></b>
                         <div style="padding-top:10px">

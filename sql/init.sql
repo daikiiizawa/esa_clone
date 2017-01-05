@@ -33,6 +33,8 @@ CREATE TABLE `comments` (
   `document_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_name` varchar(255),
+  `user_photo` varchar(255),
+  `user_photo_dir` varchar(255),
   `body` varchar(1100) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL

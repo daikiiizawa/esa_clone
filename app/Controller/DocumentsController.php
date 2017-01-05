@@ -86,7 +86,6 @@ class DocumentsController extends AppController{
                 $this->request->data = $this->Document->findById($id);
         }
         $this->set('id',$id);
-
     }
 
 

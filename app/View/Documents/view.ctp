@@ -56,27 +56,50 @@
         </div>
     </div>
 
-
     <!-- コメント一覧 -->
     <?php foreach($document['Comment'] as $document['Comment']) :?>
         <div class="col-md-12">
 
             <div class="col-md-1" style="margin-top: 17px">
-                <?= $this->User->photoImage($document, ['style' => 'width: 80px']); ?>
+                <!-- イメージ表示 -->
+                <?php if ($document['Comment']['user_photo']) :?>
+                    <?= $this->Html->image("/files/user/photo" . "/" . $document['Comment']["user_photo_dir"] . "/" . $document['Comment']["user_photo"] ,['style' => 'width: 80px']);?>
+                <?php else :?>
+                    <?= $this->Html->image("/img/acountSample.png" ,['style' => 'width: 80px']);?>
+                <?php endif ;?>
             </div>
 
             <div class="col-md-7" style="margin-top: 15px; padding-top:10px ; margin-left: 17px; background-color:#F5F5F5">
                 <div class="text-info" style="display: inline"><?= $document['Comment']['user_name'];?></div>
-                <div class="text-muted pull-right"><?= $this->Time->format($document['Comment']['created'], '%Y-%m-%d %H:%M');?></div>
+                <div class="text-muted pull-right">
+                    <?= $this->Time->format($document['Comment']['created'], '%Y-%m-%d %H:%M');?>
+                    <?php if ($currentUser['role'] == 'admin' || $currentUser['id'] == $document['Comment']['user_id']) :?>
+                        <?= $this->Html->link(
+                            '<span class="glyphicon glyphicon-pencil"></span>',[
+                                'controller' => 'comments',
+                                'action' => 'edit',$document['Comment']['id'],
+                                ], [
+                                'escape' => false
+                                ]) ;?>
+
+                        <?= $this->Form->postlink(
+                            '<span class="glyphicon glyphicon-trash"></span>',[
+                            'controller' => 'comments',
+                            'action' => 'delete',
+                            $document['Comment']['id']
+                            ], [
+                            'confirm' => '本当に削除してよろしいですか？',
+                            'escape' => false
+                            ]);?>
+                    <?php endif ;?>
+
+                </div>
 
                 <br>
                 <?= $this->Markdown->transform(h($document['Comment']['body']));?>
             </div>
         </div>
     <?php endforeach ;?>
-
-
-
 
 
     <!-- コメント投稿フォーム -->
@@ -93,6 +116,7 @@
         <!-- 対応内容フォーム -->
         <?= $this->Form->create('Comment',[
             'novalidate' => true,
+            'type' => 'file',
             'url' => [
                 'controller' => 'comments',
                 'action' => 'add'
@@ -108,6 +132,7 @@
             'style' => 'max-width:100%; max-height:700px; margin-top:10px'
         ]); ?>
 
+        <!-- hiddenで送信 -->
         <?= $this->Form->input('document_id', [
             'type' => 'hidden',
             'value' => $document['Document']['id']
@@ -122,6 +147,17 @@
             'type' => 'hidden',
             'value' => $currentUser['screen_name']
         ]); ?>
+
+        <?= $this->Form->input('user_photo', [
+            'type' => 'hidden',
+            'value' => $currentUser['photo']
+        ]); ?>
+
+        <?= $this->Form->input('user_photo_dir', [
+            'type' => 'hidden',
+            'value' => $currentUser['photo_dir']
+        ]); ?>
+
 
         <?= $this->Form->end([
             'label' => 'Comment',
