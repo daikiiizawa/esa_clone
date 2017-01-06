@@ -9,8 +9,8 @@ class Comment extends AppModel {
                 'message' => '内容を入力して下さい'
             ],
             'length' => [
-                'rule' => ['between', 1, 50],
-                'message' => '50字以下で入力して下さい'
+                'rule' => ['between', 1, 1100],
+                'message' => '1100字以下で入力して下さい'
             ],
         ],
     ];
