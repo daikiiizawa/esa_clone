@@ -2,8 +2,8 @@
 
 <div class="col-md-1" style="margin-top: 17px; margin-left: 15px">
     <!-- イメージ表示 -->
-    <?php if ($comment['Comment']['user_photo']) :?>
-        <?= $this->Html->image("/files/user/photo" . "/" . $comment['Comment']["user_photo_dir"] . "/" . $comment['Comment']["user_photo"] ,['style' => 'width: 80px']);?>
+    <?php if ($currentUser['photo']) :?>
+        <?= $this->Html->image("/files/user/photo" . "/" . $currentUser["photo_dir"] . "/" . $currentUser["photo"] ,['style' => 'width: 80px']);?>
     <?php else :?>
         <?= $this->Html->image("/img/acountSample.png" ,['style' => 'width: 80px']);?>
     <?php endif ;?>
@@ -12,7 +12,7 @@
 <!-- <div class="col-md-7" style="margin-bottom: 30px; margin-left: 17px; background-color:#F5F5F5;"> -->
 <div class="col-md-7" style="margin:15px 0px 0px 17px; background-color:#F5F5F5;">
     <?= $this->Form->create('Comment',[
-        'url' => ['action' => 'confirm'],
+        'url' => ['action' => 'addconfirm'],
         'type'  => 'post',
         'novalidate' => true,
         ]); ?>

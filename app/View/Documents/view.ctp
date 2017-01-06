@@ -113,56 +113,37 @@
 
         <div class="col-md-7" style="margin-bottom: 30px; margin-left: 17px; background-color:#F5F5F5;">
         <!-- 対応内容フォーム -->
-        <?= $this->Form->create('Comment',[
-            'novalidate' => true,
-            'type' => 'file',
-            'url' => [
-                'controller' => 'comments',
-                'action' => 'add'
-            ]
-        ]);?>
+            <?= $this->Form->create('Comment',[
+                'novalidate' => true,
+                'type' => 'post',
+                'url' => [
+                    'controller' => 'comments',
+                    'action' => 'addconfirm'
+                ]
+            ]);?>
 
-        <?= $this->Form->input('body', [
-            'label' => '対応内容',
-            'label' => false,
-            'type'  => 'text',
-            'rows' => '20',
-            'class' => 'form-control',
-            'style' => 'max-width:100%; max-height:700px; margin-top:10px'
-        ]); ?>
+            <?= $this->Form->input('body', [
+                'label' => false,
+                'type'  => 'text',
+                'rows' => '20',
+                'class' => 'form-control',
+                'style' => 'max-width:100%; max-height:700px; margin-top:10px'
+            ]); ?>
 
-        <!-- hiddenで送信 -->
-        <?= $this->Form->input('document_id', [
-            'type' => 'hidden',
-            'value' => $document['Document']['id']
-        ]); ?>
-
-        <?= $this->Form->input('user_id', [
-            'type' => 'hidden',
-            'value' => $currentUser['id']
-        ]); ?>
-
-        <?= $this->Form->input('user_name', [
-            'type' => 'hidden',
-            'value' => $currentUser['screen_name']
-        ]); ?>
-
-        <?= $this->Form->input('user_photo', [
-            'type' => 'hidden',
-            'value' => $currentUser['photo']
-        ]); ?>
-
-        <?= $this->Form->input('user_photo_dir', [
-            'type' => 'hidden',
-            'value' => $currentUser['photo_dir']
-        ]); ?>
+            <!-- hiddenで送信 -->
+            <?= $this->Form->hidden('document_id', ['value' => $document['Document']['id']]); ?>
+            <?= $this->Form->hidden('user_id', ['value' => $user['id']]); ?>
+            <?= $this->Form->hidden('user_name', ['value' => $user['name']]); ?>
+            <?= $this->Form->hidden('user_photo', ['value' => $user['photo']]); ?>
+            <?= $this->Form->hidden('user_photo_dir', ['value' => $user['photo_dir']]); ?>
 
 
-        <?= $this->Form->end([
-            'label' => 'Comment',
-            'class' => 'btn btn-primary pull-right',
-            'style' => 'margin:20px 0 30px 0'
-        ]) ;?>
+            <?= $this->Form->end([
+                'label' => '表示内容を確認',
+                'class' => 'btn btn-primary pull-right',
+                'style' => 'margin:20px 0 30px 0'
+            ]) ;?>
         </div>
+    </div>
 
 </div>

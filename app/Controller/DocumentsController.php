@@ -60,14 +60,14 @@ class DocumentsController extends AppController{
         $user_id = $this->Auth->user()['id'];
         $this->set('user_id', $user_id);
 
-        if ($this->request->is('post')) {
-            $this->Document->create();
+        // if ($this->request->is('post')) {
+        //     $this->Document->create();
 
-            if ($this->Document->save($this->request->data)) {
-                $this->Flash->success('登録が完了しました');
-                return $this->redirect(['action' => 'index']);
-            }
-        }
+        //     if ($this->Document->save($this->request->data)) {
+        //         $this->Flash->success('登録が完了しました');
+        //         return $this->redirect(['action' => 'index']);
+        //     }
+        // }
     }
 
     public function edit($id = null){
@@ -79,16 +79,29 @@ class DocumentsController extends AppController{
         if (!$this->request->data) {
             $this->request->data = $this->Document->findById($id);
         }
-
-        // if ($this->request->is('post', 'put')) {
-        //     if ($this->Document->save($this->request->data)) {
-        //         $this->Flash->success('更新しました。');
-        //         return $this->redirect(['action' => 'view',$id]);
-        //     }
-        // } else {
-        //     $this->request->data = $this->Document->findById($id);
-        // }
         $this->set('id',$id);
+    }
+
+    public function addconfirm($id = null) {
+        $this->set('title_for_layout', '確認画面');
+        $user_id = $this->Auth->user()['id'];
+        $this->set('user_id',$user_id);
+
+        // 編集画面からのpostデータ
+        $confirm = $this->request->data;
+        $this->set('confirm', $confirm);
+
+        // 確認画面に入る前にバリデーション処理
+        if ($this->request->is('post')) {
+            // モデルにpostされたデータをセット
+            $this->Document->set($this->request->data);
+
+            if (!$this->Document->validates()) {
+                $errors = $this->validateErrors($this->Document);
+                $this->set('errors',$errors);
+                $this->render('add');
+            }
+        }
     }
 
     public function confirm($id = null) {
@@ -102,6 +115,35 @@ class DocumentsController extends AppController{
         // 編集画面からのpostデータ
         $confirm = $this->request->data;
         $this->set('confirm', $confirm);
+
+        // 確認画面に入る前にバリデーション処理
+        if ($this->request->is('post')) {
+            // モデルにpostされたデータをセット
+            $this->Document->set($this->request->data);
+
+            if (!$this->Document->validates()) {
+                $errors = $this->validateErrors($this->Document);
+                $this->set('errors',$errors);
+                $id = $confirm['Document']['id'];
+                $this->set('id', $id);
+                $this->render('edit');
+            }
+        }
+    }
+
+    public function addsave($id = null) {
+        if ($this->request->is(['post', 'put'])) {
+            if ($this->Document->save($this->request->data)) {
+                $this->Flash->success('投稿しました');
+                return $this->redirect(['action' => 'index']);
+            } else {
+            $this->Flash->error('保存できませんでした。');
+            return $this->redirect(['action' => 'index']);
+            }
+        } else {
+            $this->Flash->error('失敗');
+            return $this->redirect(['action' => 'view',$id]);
+        }
     }
 
     public function save($id = null) {

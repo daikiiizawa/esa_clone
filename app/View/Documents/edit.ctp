@@ -1,7 +1,7 @@
 <div class="container">
 
 <div class="col-md-8">
-    <?= $this->Form->create('Document',[
+    <?= $this->Form->create('Document', [
         'url' => ['action' => 'confirm'],
         'type'  => 'post',
         'novalidate' => true,
