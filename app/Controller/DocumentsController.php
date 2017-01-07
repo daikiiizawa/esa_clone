@@ -178,8 +178,21 @@ class DocumentsController extends AppController{
         $this->set('title_for_layout', 'TEAM');
         $users = $this->User->find('all');
         $this->set('users', $users);
-        // debug($users);
     }
+
+    // public function useredit($id = null){
+    //     $this->set('title_for_layout', 'ユーザー編集');
+    //     $users = $this->User->find('all');
+    //     $this->set('users', $users);
+
+    //     if (!$this->User->exists($id)) {
+    //         throw new NotFoundException('ユーザーが見つかりません');
+    //     }
+    //     if (!$this->request->data) {
+    //         $this->request->data = $this->User->findById($id);
+    //     }
+    //     $this->set('id',$id);
+    // }
 
     public function posts(){
         $this->set('title_for_layout', 'POSTS');

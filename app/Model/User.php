@@ -174,6 +174,6 @@ class User extends AppModel{
         if($passwordHasher->check($password, $user['User']['password'])){
             return true;
         }
-            return false;
+        return false;
     }
 }
