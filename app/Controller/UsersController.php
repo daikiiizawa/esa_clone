@@ -2,6 +2,14 @@
 
 class UsersController extends AppController {
 
+    public $components = [
+        'Paginator' => [
+            // 'limit' => 10,
+            'order' => ['created' => 'desc']
+        ]
+    ];
+
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('signup');
@@ -138,6 +146,19 @@ class UsersController extends AppController {
         $this->User->delete($id);
         $this->Flash->success('ユーザーを削除しました。');
         return $this->redirect(['controller' => 'documents', 'action' => 'team']);
+    }
+
+    public function view($id = null){
+        if (!$this->User->exists($id)) {
+            throw new NotFoundException('ユーザーが見つかりません');
+        }
+        $this->set('title_for_layout', 'ユーザーページ');
+        $user = $this->User->findById($id);
+        $this->set('user', $user);
+
+        $user_id = $user['User']['id'];
+        $documents = $this->paginate('Document',array('Document.user_id' => $user_id));
+        $this->set(compact('documents'));
     }
 
 }

@@ -42,6 +42,7 @@
 <?= $this->Form->input('photo', [
         'type'  => 'file',
         'label' => 'プロフィール画像',
+        'class' => 'form-control'
         ]); ?>
 </div>
 
