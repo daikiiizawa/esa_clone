@@ -17,7 +17,7 @@ class UsersController extends AppController {
 
 
     public function login() {
-        $this->set('title_for_layout', 'ログイン');
+        $this->set('title_for_layout', 'Login');
         if($this->Auth->user()){
             return $this->redirect($this->Auth->redirectUrl());
         }
@@ -32,7 +32,7 @@ class UsersController extends AppController {
     }
 
     public function signup() {
-        $this->set('title_for_layout', 'ユーザー登録');
+        $this->set('title_for_layout', 'Signup');
 
         if($this->request->is('post')){
             $this->User->create();
@@ -44,7 +44,7 @@ class UsersController extends AppController {
     }
 
     public function add() {
-        $this->set('title_for_layout', 'ユーザー登録');
+        $this->set('title_for_layout', 'Add user');
 
         if($this->request->is('post')){
             $this->User->create();
@@ -56,14 +56,10 @@ class UsersController extends AppController {
     }
 
     public function edit($id = null){
-        $this->set('title_for_layout', 'ユーザー編集');
+        $this->set('title_for_layout', 'Edit user');
         if (!$this->User->exists($id)) {
             throw new NotFoundException('ユーザーが見つかりません');
         }
-
-        // if (!$this->request->data) {
-        //     $this->request->data = $this->User->findById($id);
-        // }
 
         if ($this->request->is(['post', 'put'])) {
             $this->User->id = $id;
@@ -83,33 +79,6 @@ class UsersController extends AppController {
 
         }
         $this->set('id',$id);
-
-
-        // if ($this->request->is(['post', 'put'])) {
-        //     if ($this->User->save($this->request->data)) {
-        //         $this->Flash->success('ユーザー情報を更新しました');
-
-        //         // Authコンポーネントのログインセッション情報をリフレッシュする
-        //         $user = $this->User->find('first', [
-        //                 'fields' => ['id','name', 'screen_name', 'email', 'photo', 'photo_dir', 'role'],
-        //                 'conditions' => ['id' => $this->Auth->user('id')]
-        //             ]);
-        //         $this->Auth->login($user['User']);
-
-        //         return $this->redirect($this->Auth->redirectUrl());
-        //     }
-        // } else {
-        //     $this->request->data = $this->User->findById($id);
-        //     $this->request->data = ['User' => [
-        //         'id' => $this->Auth->user('id'),
-        //         'name' => $this->Auth->user('name'),
-        //         'screen_name' => $this->Auth->user('screen_name'),
-        //         'email' => $this->Auth->user('email'),
-        //         'photo' => $this->Auth->user('photo'),
-        //         'photo_dir' => $this->Auth->user('photo_dir'),
-        //         'role' => $this->Auth->user('role'),
-        //         ]];
-        // }
     }
 
     public function save($id = null) {
@@ -149,10 +118,11 @@ class UsersController extends AppController {
     }
 
     public function view($id = null){
+        $this->set('title_for_layout', 'User view');
         if (!$this->User->exists($id)) {
             throw new NotFoundException('ユーザーが見つかりません');
         }
-        $this->set('title_for_layout', 'ユーザーページ');
+
         $user = $this->User->findById($id);
         $this->set('user', $user);
 

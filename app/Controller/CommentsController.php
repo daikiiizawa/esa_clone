@@ -25,7 +25,7 @@ class CommentsController extends AppController {
     }
 
     public function edit($id = null){
-        $this->set('title_for_layout', 'コメント編集');
+        $this->set('title_for_layout', 'Edit comment');
         if (!$this->Comment->exists($id)) {
             throw new NotFoundException('コメントが見つかりません');
         }
@@ -44,7 +44,7 @@ class CommentsController extends AppController {
     }
 
     public function confirm($id = null){
-        $this->set('title_for_layout', '確認画面');
+        $this->set('title_for_layout', 'Confirm comment');
         if (!$this->Comment->exists($id)) {
             throw new NotFoundExeption('ドキュメントが見つかりません');
         }
@@ -73,7 +73,7 @@ class CommentsController extends AppController {
     }
 
     public function addconfirm($id = null){
-        $this->set('title_for_layout', '確認画面');
+        $this->set('title_for_layout', 'Confirm comment');
 
         // 編集画面からのpostデータ
         $confirm = $this->request->data;
@@ -148,4 +148,3 @@ class CommentsController extends AppController {
     }
 
 }
-

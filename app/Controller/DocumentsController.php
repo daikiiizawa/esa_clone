@@ -31,7 +31,7 @@ class DocumentsController extends AppController{
     }
 
     public function index(){
-        $this->set('title_for_layout', 'HOME');
+        $this->set('title_for_layout', 'Home');
         $readme = $this->Document->find('all', [
             'conditions' => ['Document.title LIKE' => 'README.md'. '%'],
             ]);
@@ -43,7 +43,7 @@ class DocumentsController extends AppController{
 
 
     public function view($id = null){
-        $this->set('title_for_layout', 'ドキュメント詳細');
+        $this->set('title_for_layout', 'Document view');
         if (!$this->Document->exists($id)) {
             throw new NotFoundException('ドキュメントがみつかりません');
         }
@@ -56,22 +56,13 @@ class DocumentsController extends AppController{
 
 
     public function add(){
-        $this->set('title_for_layout', 'ドキュメント追加');
+        $this->set('title_for_layout', 'New post');
         $user_id = $this->Auth->user()['id'];
         $this->set('user_id', $user_id);
-
-        // if ($this->request->is('post')) {
-        //     $this->Document->create();
-
-        //     if ($this->Document->save($this->request->data)) {
-        //         $this->Flash->success('登録が完了しました');
-        //         return $this->redirect(['action' => 'index']);
-        //     }
-        // }
     }
 
     public function edit($id = null){
-        $this->set('title_for_layout', 'ドキュメント編集');
+        $this->set('title_for_layout', 'Edit post');
         if (!$this->Document->exists($id)) {
             throw new NotFoundException('ドキュメントが見つかりません');
         }
@@ -83,7 +74,7 @@ class DocumentsController extends AppController{
     }
 
     public function addconfirm($id = null) {
-        $this->set('title_for_layout', '確認画面');
+        $this->set('title_for_layout', 'Confirm post');
         $user_id = $this->Auth->user()['id'];
         $this->set('user_id',$user_id);
 
@@ -105,7 +96,7 @@ class DocumentsController extends AppController{
     }
 
     public function confirm($id = null) {
-        $this->set('title_for_layout', '確認画面');
+        $this->set('title_for_layout', 'Confirm post');
         if (!$this->Document->exists($id)) {
             throw new NotFoundExeption('ドキュメントが見つかりません');
         }
@@ -175,13 +166,13 @@ class DocumentsController extends AppController{
     }
 
     public function team(){
-        $this->set('title_for_layout', 'TEAM');
+        $this->set('title_for_layout', 'Team members');
         $users = $this->User->find('all');
         $this->set('users', $users);
     }
 
     public function posts(){
-        $this->set('title_for_layout', 'POSTS');
+        $this->set('title_for_layout', 'Recent posts');
         $readme = $this->Document->find('all', [
             'conditions' => ['Document.title LIKE' => 'README.md'. '%'],
             ]);
