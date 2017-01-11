@@ -8,7 +8,7 @@
         ]); ?>
 
     <?= $this->Form->input('title', [
-        'label' => 'タイトル',
+        'label' => 'Title',
         'class' => 'form-control',
         'style' => 'max-width: 100%;'
         ]); ?>
@@ -28,13 +28,13 @@
 
 
     <?= $this->Form->end([
-        'label' => '表示内容を確認',
+        'label' => 'Confirm document',
         'class' => 'btn btn-primary pull-right',
         'style' => 'margin: 20px 0px 20px 10px;'
         ]); ?>
 
     <?= $this->Html->link(
-        '戻る',['action' => 'view',$id],[
+        'Return',['action' => 'view',$id],[
         'class' => 'btn btn-default pull-right',
         'style' => 'margin: 20px 0px 20px 0px;'
         ]) ;?>

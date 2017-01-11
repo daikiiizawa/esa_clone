@@ -24,8 +24,8 @@
 <div class="col-md-4" style="margin-top: 17px">
     <table class="table table-striped">
         <thead class="text-info">
-            <th>タイトル</th>
-            <th>登録者</th>
+            <th>Title</th>
+            <th>Contributor</th>
         </thead>
 
         <tbody>

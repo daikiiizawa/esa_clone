@@ -2,7 +2,7 @@
 <div class="col-md-12">
 
     <!-- ユーザー情報 -->
-    <div class="col-md-12" style="margin-top: 10px">
+    <div class="col-md-12" style="margin-top: 30px">
         <div class="col-md-1" style="margin-right:20px">
             <!-- イメージ表示 -->
             <?php if ($user['User']['photo']) :?>
@@ -38,8 +38,17 @@
 
     <hr class="col-md-12">
 
+    <!-- ページネーション -->
+    <ul class="pagination pagination-sm" style="margin-left:30px">
+        <?= $this->Paginator->first('First') ;?>
+        <?= $this->Paginator->prev('Prev', array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>
+        <?= $this->Paginator->next('Next', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?= $this->Paginator->last('Last') ;?>
+    </ul>
+
+
     <!-- 投稿情報一覧 -->
-    <h4 class="text-info" style="margin:0 0 20px 30px">◆Document一覧</h4>
     <?php if(count($documents) == 0): ?>
         <p class="text-info col-md-11 col-md-offset-1"><?= '投稿がありません';?></p>
     <?php endif;?>
@@ -60,6 +69,8 @@
                     'controller' => 'documents',
                     'action' => 'view',
                     $document['Document']['id']
+                    ], [
+                    'class' => 'h4'
                     ]) ;?>
                 <br>
 
@@ -75,6 +86,15 @@
         <hr class="col-md-7">
 
     <?php endforeach ;?>
+
+    <!-- ページネーション -->
+    <ul class="pagination pagination-sm col-md-12" style="margin:0 0 50px 30px">
+        <?= $this->Paginator->first('First') ;?>
+        <?= $this->Paginator->prev('Prev', array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>
+        <?= $this->Paginator->next('Next', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?= $this->Paginator->last('Last') ;?>
+    </ul>
 
 </div>
 </div>

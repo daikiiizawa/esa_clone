@@ -14,9 +14,10 @@
     </div>
 </div>
 
+    <hr class="col-md-12">
+
 <div class="col-md-12" style="margin: 17px 0 0 17px">
-    <span class="h4">◆Members (<?= count($users);?>)</h4>
-    <hr>
+    <span class="h4">Members (<?= count($users);?>)</h4>
 </div>
 
     <?php foreach($users as $user) :?>
@@ -66,7 +67,7 @@
 
                 <!-- 管理者のみ編集・削除権限を持つ -->
                 <?php if ($currentUser['role'] == 'admin'):?>
-                    <?= $this->Form->postlink('削除', [
+                    <?= $this->Form->postlink('Delete', [
                         'controller' => 'users',
                         'action' => 'delete',
                         $user['User']['id']
@@ -75,12 +76,12 @@
                         'class' => 'btn btn-danger btn-xs pull-right',
                         'style' => 'margin-left:10px'
                         ]);?>
-                    <?= $this->Html->link('編集', [
+                    <?= $this->Html->link('Edit', [
                         'controller' => 'users',
                         'action' => 'edit',
                         $user['User']['id']
                         ], [
-                        'class' => 'btn btn-default btn-xs pull-right'
+                        'class' => 'btn btn-primary btn-xs pull-right'
                         ]); ?>
                     <br>
 

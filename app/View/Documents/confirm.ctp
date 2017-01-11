@@ -1,7 +1,7 @@
 <div class='container'>
     <div class="col-md-12">
 
-    <h2 class="text-info"><b>【表示内容確認】</b></h2>
+    <h2 class="text-info"><b>Confirm view</b></h2>
 
         <div class="col-md-8" style="margin-top: 17px">
             <span class="h2" style="display: inline">
@@ -43,7 +43,7 @@
     <?= $this->Form->hidden('user_id'); ?>
 
     <?= $this->Form->end([
-        'label' => '更新',
+        'label' => 'Update!',
         'class' => 'btn-group btn btn-primary pull-right',
         'style' => 'margin: 0px 10px 20px 0px;'
         ]); ?>&#010;
@@ -60,7 +60,7 @@
     <?= $this->Form->hidden('user_id'); ?>
 
     <?= $this->Form->end([
-        'label' => '戻る',
+        'label' => 'Return',
         'class' => 'btn-group btn btn-default pull-right',
         'style' => 'margin: 0px 10px 20px 0px;'
         ]); ?>&#010;

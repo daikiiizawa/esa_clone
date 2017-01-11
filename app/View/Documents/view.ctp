@@ -37,7 +37,7 @@
             </table>
 
             <?php if ($currentUser['role'] == 'admin' || $currentUser['id'] == $document['User']['id']) :?>
-                <?= $this->Form->postlink('削除',[
+                <?= $this->Form->postlink('Delete',[
                     'action' => 'delete',
                     $document['Document']['id']
                     ], [
@@ -48,11 +48,11 @@
             <?php endif ;?>
 
 
-            <?= $this->Html->link('編集', [
+            <?= $this->Html->link('Edit', [
                 'action' => 'edit',
                 $document['Document']['id']
                 ], [
-                'class' => 'btn btn-default pull-right'
+                'class' => 'btn btn-primary pull-right'
                 ]);?>
         </div>
         <div class="col-md-4"></div>
@@ -106,7 +106,7 @@
     <?php endforeach ;?>
 
     <hr class="col-md-12">
-    <h4 class="col-md-12 text-info"><b><コメント入力欄></b></h6>
+    <h4 class="col-md-12 text-info" style="margin-left:15px">Write comment</h4>
 
     <!-- コメント投稿フォーム -->
     <div class="col-md-12" style="margin-top: 17px">
@@ -146,7 +146,7 @@
 
 
             <?= $this->Form->end([
-                'label' => '表示内容を確認',
+                'label' => 'Confirm comment',
                 'class' => 'btn btn-primary pull-right',
                 'style' => 'margin:20px 0 30px 0'
             ]) ;?>

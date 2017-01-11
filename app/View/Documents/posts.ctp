@@ -1,9 +1,18 @@
 <div class='container'>
 <div class="col-md-12">
 
-<div class="col-md-7" style="margin-top: 17px">
+<div class="col-md-12" style="margin-top: 17px">
     <span class="h2 text-info" style="display: inline">Posts</span>
 </div>
+
+<!-- ページネーション -->
+<ul class="pagination pagination-sm" style="margin-left:30px">
+    <?= $this->Paginator->first('First') ;?>
+    <?= $this->Paginator->prev('Prev', array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+    <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>
+    <?= $this->Paginator->next('Next', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+    <?= $this->Paginator->last('Last') ;?>
+</ul>
 
 <div class="col-md-12" style="margin-top: 17px">
 
@@ -30,9 +39,12 @@
             <?php endif ;?>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <?= $this->Html->link($document['Document']['title'], [
-                'action' => 'view', $document['Document']['id']
+                'action' => 'view',
+                $document['Document']['id']
+                ], [
+                'class' => 'h4'
                 ]) ;?>
             <br>
 
@@ -51,7 +63,14 @@
 
     <?php endforeach ;?>
 
+    <!-- ページネーション -->
+    <ul class="pagination pagination-sm col-md-12" style="margin:0 0 50px 30px">
+        <?= $this->Paginator->first('First') ;?>
+        <?= $this->Paginator->prev('Prev', array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>
+        <?= $this->Paginator->next('Next', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?= $this->Paginator->last('Last') ;?>
+    </ul>
+
 </div>
-
-
 </div>

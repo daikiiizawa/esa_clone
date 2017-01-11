@@ -4,7 +4,7 @@ class UsersController extends AppController {
 
     public $components = [
         'Paginator' => [
-            // 'limit' => 10,
+            'limit' => 10,
             'order' => ['created' => 'desc']
         ]
     ];
