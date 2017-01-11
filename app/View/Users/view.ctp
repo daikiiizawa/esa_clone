@@ -47,7 +47,6 @@
         <?= $this->Paginator->last('Last') ;?>
     </ul>
 
-
     <!-- 投稿情報一覧 -->
     <?php if(count($documents) == 0): ?>
         <p class="text-info col-md-11 col-md-offset-1"><?= '投稿がありません';?></p>
@@ -87,14 +86,17 @@
 
     <?php endforeach ;?>
 
-    <!-- ページネーション -->
-    <ul class="pagination pagination-sm col-md-12" style="margin:0 0 50px 30px">
-        <?= $this->Paginator->first('First') ;?>
-        <?= $this->Paginator->prev('Prev', array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
-        <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>
-        <?= $this->Paginator->next('Next', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
-        <?= $this->Paginator->last('Last') ;?>
-    </ul>
+        <!-- 投稿情報一覧 -->
+    <?php if(count($documents) !== 0): ?>
+        <!-- ページネーション -->
+        <ul class="pagination pagination-sm col-md-12" style="margin:0 0 50px 30px">
+            <?= $this->Paginator->first('First') ;?>
+            <?= $this->Paginator->prev('Prev', array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+            <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>
+            <?= $this->Paginator->next('Next', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+            <?= $this->Paginator->last('Last') ;?>
+        </ul>
+    <?php endif;?>
 
 </div>
 </div>

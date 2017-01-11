@@ -67,14 +67,35 @@
             <div class="col-md-1" style="margin-top: 17px">
                 <!-- イメージ表示 -->
                 <?php if ($document['Comment']['user_photo']) :?>
-                    <?= $this->Html->image("/files/user/photo" . "/" . $document['Comment']["user_photo_dir"] . "/" . $document['Comment']["user_photo"] ,['style' => 'width: 80px']);?>
+                    <?= $this->Html->link($this->Html->image("/files/user/photo" . "/" . $document['Comment']["user_photo_dir"] . "/" . $document['Comment']["user_photo"] ,
+                        ['style' => 'width: 80px']), [
+                        'controller' => 'users',
+                        'action' => 'view',
+                        $document['Comment']['user_id']
+                        ],[
+                        'escape' => false
+                        ]) ;?>
                 <?php else :?>
-                    <?= $this->Html->image("/img/acountSample.png" ,['style' => 'width: 80px']);?>
+                    <?= $this->Html->link($this->Html->image("/img/acountSample.png" ,
+                        ['style' => 'width: 80px']), [
+                        'controller' => 'users',
+                        'action' => 'view',
+                        $document['Comment']['user_id']
+                        ], [
+                        'escape' => false
+                        ]) ;?>
                 <?php endif ;?>
             </div>
 
             <div class="col-md-7" style="margin-top: 15px; padding-top:10px ; margin-left: 28px; background-color:#F5F5F5">
-                <div class="text-info" style="display: inline"><?= $document['Comment']['user_name'];?></div>
+                <div class="text-info" style="display: inline">
+                    <?= $this->Html->link($document['Comment']['user_name'], [
+                        'controller' => 'users',
+                        'action' => 'view',
+                        $document['Comment']['user_id']
+                        ]);?>
+
+                </div>
                 <div class="text-muted pull-right">
                     <?= $this->Time->format($document['Comment']['created'], '%Y-%m-%d %H:%M');?>
                     <?php if ($currentUser['role'] == 'admin' || $currentUser['id'] == $document['Comment']['user_id']) :?>
@@ -112,9 +133,23 @@
     <div class="col-md-12" style="margin-top: 17px">
         <div class="col-md-1">
                 <?php if ($currentUser['photo']) :?>
-                    <?= $this->Html->image("/files/user/photo" . "/" . $currentUser["photo_dir"] . "/" . $currentUser["photo"] ,['style' => 'width: 80px']);?>
+                    <?= $this->Html->link($this->Html->image("/files/user/photo" . "/" . $currentUser["photo_dir"] . "/" . $currentUser["photo"] ,
+                        ['style' => 'width: 80px']), [
+                        'controller' => 'users',
+                        'action' => 'view',
+                        $currentUser['id']
+                        ],[
+                        'escape' => false
+                        ]) ;?>
                 <?php else :?>
-                    <?= $this->Html->image("/img/acountSample.png" ,['style' => 'width: 80px']);?>
+                    <?= $this->Html->link($this->Html->image("/img/acountSample.png" ,
+                        ['style' => 'width: 80px']), [
+                        'controller' => 'users',
+                        'action' => 'view',
+                        $currentUser['id']
+                        ], [
+                        'escape' => false
+                        ]) ;?>
                 <?php endif ;?>
         </div>
 

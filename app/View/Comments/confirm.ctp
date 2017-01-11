@@ -1,6 +1,6 @@
 <div class='container'>
 
-    <h2 class="text-info"><b>【表示内容確認】</b></h2>
+    <h2 class="text-info"><b>Confirm view</b></h2>
 
     <div class="col-md-12" style="margin-top: 17px">
         <div class="col-md-1">
@@ -38,7 +38,7 @@
 
         <div class="col-md-8" style="margin-left: 17px;">
             <?= $this->Form->end([
-                'label' => '更新',
+                'label' => 'Update!',
                 'class' => 'btn btn-primary pull-right',
                 'style' => 'margin-left:10px'
             ]) ;?>
@@ -62,7 +62,7 @@
             <?= $this->Form->hidden('body'); ?>
 
             <?= $this->Form->end([
-                'label' => '戻る',
+                'label' => 'Return',
                 'class' => 'btn btn-default pull-right'
             ]) ;?>
         </div>

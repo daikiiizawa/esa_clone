@@ -35,13 +35,13 @@
     <?= $this->Form->hidden('user_photo_dir'); ?>
 
     <?= $this->Form->end([
-        'label' => '表示内容を確認',
+        'label' => 'Confirm comment',
         'class' => 'btn btn-primary pull-right',
         'style' => 'margin: 20px 0px 20px 10px;'
         ]); ?>
 
     <?= $this->Html->link(
-        '戻る',['controller' => 'documents', 'action' => 'view',$document_id],[
+        'Return',['controller' => 'documents', 'action' => 'view',$document_id],[
         'class' => "btn btn-default pull-right",
         'style' => 'margin: 20px 0px 20px 0px;'
         ]) ;?>
