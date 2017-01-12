@@ -1,6 +1,6 @@
 <div class='container'>
 
-    <h2 class="text-info"><b>Confirm view</b></h2>
+    <h2 class="text-success">Confirm view</h2>
 
     <div class="col-md-12" style="margin-top: 17px">
         <div class="col-md-1">

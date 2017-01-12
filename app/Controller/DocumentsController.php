@@ -37,8 +37,51 @@ class DocumentsController extends AppController{
             ]);
         $this->set('readme', $readme);
 
-        $documents = $this->Paginator->paginate('Document');
+        // $documents = $this->Paginator->paginate('Document');
+        $documents = $this->Document->find('all');
         $this->set('documents', $documents);
+
+        $titles = array();
+        $large_categories = array();
+        $medium_categories = array();
+        $no_categories = array();
+        $categories = array();
+
+        foreach ($documents as $document) {
+            array_push($titles, $document['Document']['title']);
+            $pick_large_cate = strstr($document['Document']['title'], "/", TRUE);
+            $pick_medium_cate = strstr(substr(strstr($document['Document']['title'], "/"), 1), "/", TRUE);
+            if (!$pick_large_cate) {
+                $pick_large_cate = 'カテゴリなし';
+                array_push($no_categories, $document['Document']['title']);
+            }
+            if (!$pick_medium_cate) {
+                $pick_medium_cate = 'カテゴリなし';
+                // array_push($no_categories, $document['Document']['title']);
+            }
+            array_push($categories, $pick_large_cate.'/'.$pick_medium_cate);
+
+            array_push($large_categories, $pick_large_cate);
+            array_push($medium_categories, $pick_medium_cate);
+
+        }
+        $this->set('titles', $titles);
+        $this->set('large_categories', $large_categories);
+        $this->set('medium_categories', $medium_categories);
+        $this->set('no_categories', $no_categories);
+        $this->set('categories', $categories);
+
+        $unique_large_categories = array_keys(array_count_values($large_categories));
+        $this->set('unique_large_categories', $unique_large_categories);
+        $unique_medium_categories = array_keys(array_count_values($medium_categories));
+        $this->set('unique_medium_categories', $unique_medium_categories);
+
+        $categories = array_keys(array_count_values($categories));
+        $this->set('categories', $categories);
+
+        // $categories = array('large'=>array($unique_large_categories),'midium'=>array($medium_categories));
+        // $this->set('categories', $categories);
+
     }
 
 

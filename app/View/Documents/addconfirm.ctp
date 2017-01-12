@@ -1,7 +1,7 @@
 <div class='container'>
     <div class="col-md-12">
 
-    <h2 class="text-info"><b>Confirm view</b></h2>
+    <h2 class="text-success">Confirm view</h2>
 
         <div class="col-md-8" style="margin-top: 17px">
             <span class="h2" style="display: inline">
