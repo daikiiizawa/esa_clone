@@ -1,5 +1,5 @@
-$(function(){
-    $("#acMenu dt").on("click", function() {
-        $(this).next().slideToggle();
+$(function() {
+    $("button").click(function () {
+        $(".div2 p").text($(".div1 input:text").val());
     });
 });
