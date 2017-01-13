@@ -2,9 +2,10 @@
 /* 親の[ul] */
 .syncer-acdn-parent
 {
-    width: 250px ;
+    /*width: 250px ;*/
     margin: 0px.0 0 -15px ;
-    padding: 12px 18px ;
+    /*padding: 12px 18px ;*/
+    padding: 12px 10px 800px 18px;
     background-color: #585858 ;
     border: 2px solid rgba( 0,0,0, 0.1 ) ;
 }
@@ -79,6 +80,19 @@
     font-size: 90%;
 }
 
+.link
+{
+    display: block ;
+    padding: 8px 0 ;
+    /*font-weight: 700 ;*/
+    text-decoration: none ;
+    color: #FFFFFF;
+    font-size: 90%;
+    background-color: #585858 ;
+    border:none;
+    white-space: nowrap;
+}
+
 .syncer-acdn-parent li a:hover
 {
     cursor: pointer ;
@@ -86,9 +100,21 @@
     background: rgba( 0,0,0, 0.1 ) ;
 }
 
+.link:hover
+{
+    cursor: pointer ;
+    color: #f00 ;
+    background: rgba( 0,0,0, 0.1 ) ;
+}
 
 /* 子の[a] */
 .syncer-acdn-child li a:before
+{
+    content: "∟" ;
+    padding-right: 5px ;
+    margin-left: 10px ;
+}
+.link:before
 {
     content: "∟" ;
     padding-right: 5px ;
@@ -115,20 +141,62 @@
     }) ;
 </script>
 
-
-<div class="col-md-12">
-
-    <ul class="syncer-acdn-parent"><p class="text-default" style="color:#FFFFFF">README</p>
+<!-- アコーディオンメニュー -->
+<div class="col-lg-3 small">
+    <ul class="syncer-acdn-parent">
+        <p>
+            <?= $this->Html->link('README', [
+                ], [
+                'style' => "color:#FFFFFF"
+                ]);?>
+        </p>
         <?php foreach ($unique_large_categories as $unique_large_category) :?>
             <?php if ($unique_large_category != 'カテゴリなし'): ?>
-                <li><p><a class="syncer-acdn " data-target="syncer-acdn-<?= $unique_large_category;?>">&nbsp;<?= $unique_large_category;?></a></p>
+                <li><p><a class="syncer-acdn " data-target="syncer-acdn-<?= $unique_large_category;?>">&nbsp;- <?= $unique_large_category;?></a></p>
                     <ul id="syncer-acdn-<?= $unique_large_category;?>" class="syncer-acdn-child">
                         <?php foreach ($categories as $category): ?>
-                            <?php if ($unique_large_category == strstr($category, "/", TRUE)) :?>
+                            <?php if ($unique_large_category == strstr($category, "/", TRUE) && substr(strstr($category, "/"),1) !== 'カテゴリなし') :?>
                                 <li>
-                                    <?= $this->Html->link(substr(strstr($category, "/"),1), [
-                                        'action' => 'view',
-                                        ]) ;?>
+                                    <?= $this->Form->create(NULL, [
+                                        'url' => [
+                                        'action' => 'find'
+                                        ]
+                                        ]); ?>
+
+                                    <?= $this->Form->hidden('category', [
+                                        'value' => $category
+                                        ]); ?>
+
+                                    <?= $this->Form->end([
+                                        'label' => substr(strstr($category, "/"),1),
+                                        'class' => 'link',
+                                        'style' => 'padding-right:240px; max-width: 240px'
+                                        ]); ?>
+
+                                </li>
+                            <?php endif ;?>
+                        <?php endforeach ;?>
+
+                        <?php foreach ($categories as $category): ?>
+                            <!-- カテゴリなしの場合 -->
+                            <?php if ($unique_large_category == strstr($category, "/", TRUE) && substr(strstr($category, "/"),1) == 'カテゴリなし') :?>
+                                <li>
+                                    <?= $this->Form->create(NULL, [
+                                        'url' => [
+                                        'action' => 'find'
+                                        ]
+                                        ]); ?>
+
+                                    <?= $this->Form->hidden('category', [
+                                        'value' => $category
+                                        ]); ?>
+
+                                    <?= $this->Form->end([
+                                        'label' => '# 全て表示 (カテゴリなし含む)',
+                                        'class' => 'link',
+                                        'style' => 'padding-right:240px; max-width: 240px'
+                                        ]); ?>
+
                                 </li>
                             <?php endif ;?>
                         <?php endforeach ;?>
@@ -137,29 +205,45 @@
                 </li>
             <?php endif; ?>
         <?php endforeach ;?>
-            <li><p><a class="syncer-acdn" data-target="syncer-acdn-nocategory">&nbsp;(no category)</a></p>
-                <ul id="syncer-acdn-nocategory" class="syncer-acdn-child">
-                    <?php foreach ($no_categories as $no_category): ?>
-                        <li>
-                            <?= $this->Html->link($no_category,[]) ;?>
-                        </li>
-                    <?php endforeach ;?>
-                </ul>
-            </li>
-    </ul>
 
+        <!-- nocategoryメニュー -->
+        <li><p><a class="syncer-acdn" data-target="syncer-acdn-nocategory">&nbsp;(no category)</a></p>
+            <ul id="syncer-acdn-nocategory" class="syncer-acdn-child">
+                <?php foreach ($no_categories as $no_category): ?>
+                    <li>
+                        <?= $this->Form->create(NULL, [
+                            'url' => [
+                            'action' => 'find'
+                            ]
+                            ]); ?>
+
+                        <?= $this->Form->hidden('category', [
+                            'value' => '(no category)/'.$no_category
+                            ]); ?>
+
+                        <?= $this->Form->end([
+                            'label' => $no_category,
+                            'class' => 'link',
+                            'style' => 'padding-right:240px; max-width: 240px'
+                            ]); ?>
+                    </li>
+                <?php endforeach ;?>
+            </ul>
+        </li>
+    </ul>
 </div>
 
+<!-- READMEの表示 -->
+<div class="col-md-8" style="margin-top: 17px">
 
-<div class="col-md-12">
-    <div class="col-md-3"></div>
-
-    <div class="col-md-8">
+    <!-- タイトル    -->
+    <div class="col-md-12">
         <span class="h2">
             <?= $this->Html->link(h($readme[0]['Document']['title']), [
                 'action' => 'view',$readme[0]['Document']['id'],
             ]);?>
         </span>
+
         <span class="h3">
             <?= $this->Html->link(
                 '<span class="glyphicon glyphicon-pencil"></span>',[
@@ -169,36 +253,8 @@
                     ]) ;?>
         </span>
     </div>
-</div>
+    <hr class="col-md-12">
 
-<div class="col-md-3 small" style="margin-top: 17px">
-    <table class="table table-striped">
-        <thead class="text-info">
-            <th>Title</th>
-        </thead>
-
-        <tbody>
-            <?php foreach($documents as $document) :?>
-                <tr>
-                    <td><?= $this->Html->link($document['Document']['title'], [
-                        'action' => 'view',
-                        $document['Document']['id']
-                        ]) ;?>
-                    </td>
-                </tr>
-
-            <?php endforeach ;?>
-        </tbody>
-    </table>
-</div>
-
-<!-- READMEの表示 -->
-<div class="col-md-8" style="margin-top: 17px">
-    <table class="table">
-        <tbody>
-            <tr>
-                <td><?= $this->Markdown->transform(h($readme[0]['Document']['body']));?></td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- 本文 -->
+    <?= $this->Markdown->transform(h($readme[0]['Document']['body']));?>
 </div>

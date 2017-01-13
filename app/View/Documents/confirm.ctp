@@ -1,7 +1,8 @@
-<div class='container'>
-    <div class="col-md-12">
+<h3 class="text-info bg-info" style="padding:15px 0 15px 0; margin:0 0 10px 0">&nbsp;&nbsp;Confirm view</h3>
 
-    <h2 class="text-success">Confirm view</h2>
+<div class='container'>
+
+    <div class="col-md-12">
 
         <div class="col-md-8" style="margin-top: 17px">
             <span class="h2" style="display: inline">
