@@ -3,7 +3,7 @@
 .syncer-acdn-parent
 {
     /*width: 250px ;*/
-    margin: 0px.0 0 -15px ;
+    margin: 0px.0 0 -40px ;
     /*padding: 12px 18px ;*/
     padding: 12px 10px 800px 18px;
     background-color: #585858 ;
@@ -141,8 +141,9 @@
     }) ;
 </script>
 
+<div class="col-md-12">
 <!-- アコーディオンメニュー -->
-<div class="col-lg-3 small">
+<div class="col-md-3 small" style="margin-left: -30px">
     <ul class="syncer-acdn-parent">
         <p>
             <?= $this->Html->link('README', [
@@ -152,7 +153,7 @@
         </p>
         <?php foreach ($unique_large_categories as $unique_large_category) :?>
             <?php if ($unique_large_category != 'カテゴリなし'): ?>
-                <li><p><a class="syncer-acdn " data-target="syncer-acdn-<?= $unique_large_category;?>">&nbsp;- <?= $unique_large_category;?></a></p>
+                <li><p><a class="syncer-acdn " data-target="syncer-acdn-<?= $unique_large_category;?>">&nbsp;<?= $unique_large_category;?></a></p>
                     <ul id="syncer-acdn-<?= $unique_large_category;?>" class="syncer-acdn-child">
                         <?php foreach ($categories as $category): ?>
                             <?php if ($unique_large_category == strstr($category, "/", TRUE) && substr(strstr($category, "/"),1) !== 'カテゴリなし') :?>
@@ -170,7 +171,7 @@
                                     <?= $this->Form->end([
                                         'label' => substr(strstr($category, "/"),1),
                                         'class' => 'link',
-                                        'style' => 'padding-right:240px; max-width: 240px'
+                                        'style' => 'padding-right:190px; max-width: 190px'
                                         ]); ?>
 
                                 </li>
@@ -194,7 +195,7 @@
                                     <?= $this->Form->end([
                                         'label' => '# 全て表示 (カテゴリなし含む)',
                                         'class' => 'link',
-                                        'style' => 'padding-right:240px; max-width: 240px'
+                                        'style' => 'padding-right:190px; max-width: 190px'
                                         ]); ?>
 
                                 </li>
@@ -224,7 +225,7 @@
                         <?= $this->Form->end([
                             'label' => $no_category,
                             'class' => 'link',
-                            'style' => 'padding-right:240px; max-width: 240px'
+                            'style' => 'padding-right:190px; max-width: 190px'
                             ]); ?>
                     </li>
                 <?php endforeach ;?>
@@ -234,7 +235,7 @@
 </div>
 
 <!-- READMEの表示 -->
-<div class="col-md-8" style="margin-top: 17px">
+<div class="col-md-9" style="margin-top: 17px">
 
     <!-- タイトル    -->
     <div class="col-md-12">
@@ -257,4 +258,5 @@
 
     <!-- 本文 -->
     <?= $this->Markdown->transform(h($readme[0]['Document']['body']));?>
+</div>
 </div>

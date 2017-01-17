@@ -17,7 +17,7 @@
                     strstr(strstr($document['Document']['title'],'/',TRUE), strstr($category,'/',TRUE))
         ):?>
 
-            <div class="col-md-1" style="margin-right:10px">
+            <div class="col-md-1" style="margin-right:30px">
                 <!-- イメージ表示 -->
                 <?php if ($document['User']['photo']) :?>
                     <?= $this->Html->link($this->Html->image("/files/user/photo" . "/" . $document['User']["photo_dir"] . "/" . $document['User']["photo"] ,['style' => 'width: 70px']), [
@@ -73,7 +73,7 @@
                         strstr(strstr($document['Document']['title'],'/',TRUE), strstr($category,'/',TRUE))
                         ):?>
 
-            <div class="col-md-1" style="margin-right:10px">
+            <div class="col-md-1" style="margin-right:30px">
                 <!-- イメージ表示 -->
                 <?php if ($document['User']['photo']) :?>
                     <?= $this->Html->link($this->Html->image("/files/user/photo" . "/" . $document['User']["photo_dir"] . "/" . $document['User']["photo"] ,['style' => 'width: 70px']), [
@@ -125,7 +125,7 @@
         <!-- 大カテゴリなしの場合の一覧表示 -->
         <?php elseif ($document['Document']['title'] == substr(strstr($category,'/'),1)):?>
 
-            <div class="col-md-1" style="margin-right:10px">
+            <div class="col-md-1" style="margin-right:30px">
                 <!-- イメージ表示 -->
                 <?php if ($document['User']['photo']) :?>
                     <?= $this->Html->link($this->Html->image("/files/user/photo" . "/" . $document['User']["photo_dir"] . "/" . $document['User']["photo"] ,['style' => 'width: 70px']), [
@@ -180,5 +180,4 @@
     <?php endforeach ;?>
 
 </div>
-
 </div>

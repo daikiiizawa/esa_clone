@@ -1,6 +1,3 @@
-<div class='container'>
-<div class="col-md-12">
-
 <div class="col-md-12" style="margin-top: 17px">
     <span class="h2 text-info" style="display: inline">Posts</span>
 </div>
@@ -72,5 +69,4 @@
         <?= $this->Paginator->last('Last') ;?>
     </ul>
 
-</div>
 </div>
